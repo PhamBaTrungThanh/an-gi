@@ -40,7 +40,8 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-login" */ '@/views/Login.vue'),
+        import(/* webpackChunkName: "client-chunk-login" */
+        '@/views/Login.vue'),
       meta: {
         authNotRequired: true
       }
@@ -49,9 +50,13 @@ const router = new Router({
       path: '/products',
       name: 'products',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Products.vue')
+        import(/* webpackChunkName: "client-chunk-products" */
+        '@/views/Products.vue')
     },
-    { path: '*', redirect: '/home' }
+    {
+      path: '*',
+      redirect: '/home'
+    }
   ]
 })
 
