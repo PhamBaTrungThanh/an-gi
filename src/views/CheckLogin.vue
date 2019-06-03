@@ -1,7 +1,5 @@
 <template>
-  <h1 class="loading-title">
-    Loading...
-  </h1>
+  <h1 class="loading-title">Loading...</h1>
 </template>
 
 <script>
@@ -30,9 +28,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.loading-title {
-  text-align: center;
-}
-</style>

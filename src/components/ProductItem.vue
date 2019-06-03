@@ -21,25 +21,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '@/theme/variables.scss';
-
-.product-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-
-  .delete-btn {
-    cursor: pointer;
-    padding: 5px 10px;
-    border: 1px solid;
-    display: inline-block;
-    border-radius: 3px;
-    margin-left: 10px;
-    color: $danger-color;
-    border-color: $danger-color;
-  }
-}
-</style>

@@ -82,33 +82,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '@/theme/variables.scss';
-
-.page-wrapper {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-
-  .login-page-title {
-    text-align: center;
-  }
-
-  .login-btn {
-    margin-top: 20px;
-    cursor: pointer;
-    padding: 5px 20px;
-    border: 1px solid;
-    display: inline-block;
-    border-radius: 3px;
-    border-color: #2c3e50;
-
-    &:hover {
-      color: $vue-color;
-      border-color: $vue-color;
-    }
-  }
-}
-</style>

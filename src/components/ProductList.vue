@@ -31,20 +31,3 @@ export default {
   methods: mapActions('products', ['deleteUserProduct'])
 }
 </script>
-
-<style lang="scss" scoped>
-@import '@/theme/variables.scss';
-
-.infos-label {
-  text-align: center;
-}
-
-.product-row {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 500px;
-  margin: 10px auto;
-  justify-content: space-between;
-}
-</style>
