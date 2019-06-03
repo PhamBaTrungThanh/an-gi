@@ -4,7 +4,9 @@
   "prettier.eslintIntegration": true,
 
   "eslint.autoFixOnSave": true,
-  "eslint.options": { "extensions": [".html", ".js", ".vue", ".scss"] },
+  "eslint.options": {
+    "extensions": [".html", ".js", ".vue", ".css"]
+  },
   "eslint.validate": [
     "javascript",
     {

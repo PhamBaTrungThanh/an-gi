@@ -7221,6 +7221,11 @@ jest@^23.6.0:
     import-local "^1.0.0"
     jest-cli "^23.6.0"
 
+jets@^0.14.1:
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/jets/-/jets-0.14.1.tgz#7b0ab29d4297d005766ceaf8af6c00f57ed0f04f"
+  integrity sha512-h4wbT0eCiRTTsDfSntmU8OdS9Fs5vd62IqVbmDeHcofcL+9CxobulTIdQPydkiMq5V7RiTwDwGzHvrZKHiWj7Q==
+
 jju@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/jju/-/jju-1.4.0.tgz#a3abe2718af241a2b2904f84a625970f389ae32a"
