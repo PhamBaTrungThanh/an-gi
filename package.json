@@ -1,5 +1,5 @@
 {
-  "name": "bento-starter",
+  "name": "an-gi-day",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -64,8 +64,7 @@
   "resolutions": {
     "terser": "3.14.1"
   },
-  "bundlesize": [
-    {
+  "bundlesize": [{
       "path": "./dist/js/chunk-vendors*.js",
       "maxSize": "125 kB"
     },
