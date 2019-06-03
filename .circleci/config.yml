@@ -12,19 +12,19 @@ jobs:
       - checkout
 
       - restore_cache:
-          name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+            - v2-deps-{{ checksum "package-lock.json" }}
+            - v2-deps
 
       - run:
           name: 'Install dependencies'
-          command: yarn install --frozen-lockfile
+          command: npm ci
 
       - save_cache:
-          name: Save Yarn Package Cache
           paths:
-            - ~/.cache/yarn
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+            - ~/.npm
+            - ~/.cache
+          key: v2-deps-{{ checksum "package-lock.json" }}
 
       - persist_to_workspace:
           root: .
