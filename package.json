@@ -22,6 +22,7 @@
     "autoprefixer": "^9.5.1",
     "core-js": "^3.1.0",
     "firebase": "^6.0.2",
+    "google-maps-api-loader": "^1.1.1",
     "is_js": "^0.9.0",
     "lodash": "^4.17.11",
     "pwacompat": "^2.0.8",

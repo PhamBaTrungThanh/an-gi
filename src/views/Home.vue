@@ -1,17 +1,17 @@
 <template>
-  <div class="container mx-auto">
-    <div class="my-8">
-      <h1 class="text-large font-bold">Tọa độ của bạn</h1>
-      <p class="mt-4">Latitude: {{ latitude }}</p>
-      <p class="mt-4">Longitude: {{ longitude }}</p>
-    </div>
+  <div>
+    <google-maps></google-maps>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import GoogleMaps from './GoogleMaps'
 
 export default {
+  components: {
+    GoogleMaps
+  },
   data() {
     return {
       latitude: 0,
@@ -32,20 +32,11 @@ export default {
   },
   computed: mapState('app', ['appTitle']),
   mounted() {
-    this.getGeolocation()
+    this.setDefaultCoordinates()
   },
+
   methods: {
-    getGeolocation() {
-      navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError)
-    },
-    geoError(error) {
-      console.error(error)
-    },
-    geoSuccess(position) {
-      console.log(position)
-      this.latitude = position.coords.latitude
-      this.longitude = position.coords.longitude
-    }
+    ...mapActions('map', ['setDefaultCoordinates'])
   }
 }
 </script>
