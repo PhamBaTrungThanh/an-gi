@@ -1,7 +1,8 @@
 export default {
-  latitude: null,
-  longitude: null,
+  centerCoordiates: {},
   zoomLevel: null,
+
+  mapBoundingBox: {},
   style: {
     default: [
       {
