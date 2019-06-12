@@ -49,10 +49,14 @@ export default {
             zoom: this.map.getZoom()
           }
           this.setCurrentMapCoordinates(coordinates)
+          this.setBoundingBoxCoordiantes(this.map.getBounds())
         }, 200)
       )
     },
-    ...mapActions('map', ['setCurrentMapCoordinates'])
+    ...mapActions('map', [
+      'setCurrentMapCoordinates',
+      'setBoundingBoxCoordiantes'
+    ])
   }
 }
 </script>
