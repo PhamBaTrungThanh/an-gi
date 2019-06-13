@@ -1,1 +1,5 @@
-export default {}
+export default {
+  pins(state) {
+    return state.pinsOnMap
+  }
+}

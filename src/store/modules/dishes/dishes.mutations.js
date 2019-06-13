@@ -1,7 +1,7 @@
 export default {
   /* Product input name */
 
-  setDishesInMap: (state, dishes) => {
-    state.dishesInMap = dishes
+  setPinsOnMap: (state, dishes) => {
+    state.pinsOnMap = dishes
   }
 }
