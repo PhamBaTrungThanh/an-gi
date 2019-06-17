@@ -1,5 +1,5 @@
-import isNil from 'lodash/isNil'
-
 export default {
-  isUserLoggedIn: state => !isNil(state.user)
+  isUserAuthenticated: state => !state.user.type === 'guest',
+  getAccessToken: state =>
+    state.credentials.accessToken ? state.credentials.accessToken : ''
 }

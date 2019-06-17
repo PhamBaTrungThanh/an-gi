@@ -1,3 +1,14 @@
 export default {
-  user: undefined
+  guestCredentials: {
+    username: 'guest@phambatrungthanh.com',
+    password: 'guest'
+  },
+  credentials: {
+    accessToken: '',
+    refreshToken: ''
+  },
+  user: {
+    name: '',
+    type: ''
+  }
 }
