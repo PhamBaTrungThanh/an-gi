@@ -19,8 +19,8 @@
     "node": ">=9.3.0"
   },
   "dependencies": {
-    "algoliasearch": "^3.33.0",
     "autoprefixer": "^9.5.1",
+    "axios": "^0.19.0",
     "core-js": "^3.1.0",
     "firebase": "^6.0.2",
     "google-maps-api-loader": "^1.1.1",
@@ -115,5 +115,5 @@
     "setupTestFrameworkScriptFile": "<rootDir>/tests/unit/setup.js"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "bento-starter@0.1.0"
+  "_id": "an-gi-day@0.1.0"
 }
