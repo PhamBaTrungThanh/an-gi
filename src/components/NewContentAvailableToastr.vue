@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
     <template v-if="refreshingApp"
-      >Loading new content...</template
+      >Đang tải nội dung mới...</template
     >
     <template v-else>
-      New content available. Please
-      <span class="refresh-btn" @click="$emit('refresh')">REFRESH</span>
+      Đã có bản cập nhật mới, xin hãy
+      <span class="refresh-btn" @click="$emit('refresh')">CÀI ĐẶT</span>
     </template>
   </div>
 </template>

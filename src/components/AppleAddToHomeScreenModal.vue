@@ -4,19 +4,18 @@
       <div class="close" @click="$emit('close')"></div>
       <div class="main-content">
         <img class="app-logo" src="@/assets/logo.png" />
-        <h3 class="title">Install bento starter</h3>
+        <h3 class="title">Cài đặt Ăn Gì Đây</h3>
         <p class="description">
-          Install this application to your home screen for quickly and easy
-          access when you're on the go.
+          Cài đặt ứng dụng vào màn hình nền của bạn để có thể tăng tốc truy cập.
         </p>
       </div>
 
       <div class="footer">
-        Just tap
+        Chỉ cần nhấn vào
         <img
           class="apple-navigation-action-img"
           src="@/assets/img/apple-navigation-action.png"
-        />then 'Add to Home Screen'
+        />sau đó chọn 'Add to Home Screen'
       </div>
     </div>
   </div>
