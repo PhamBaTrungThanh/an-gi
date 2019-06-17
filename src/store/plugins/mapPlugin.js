@@ -1,12 +1,10 @@
-import searchAPI from '@/respositories/algolia'
+import { GET_SUGGESTIONS_AROUND_CENTER_POINT } from '@/API/map'
 
-export default function algoliaRespository() {
-  const api = new searchAPI()
-
+export default function mapPlugin() {
   return store => {
     const queryDishesBaseOnMapCenter = async coords => {
       try {
-        const dishPins = await api.SEARCH_AROUND_CENTER_POINT(coords)
+        const dishPins = await GET_SUGGESTIONS_AROUND_CENTER_POINT(coords)
         store.dispatch('dishes/setPinsOnMap', dishPins.hits)
       } catch (e) {
         console.log(e)
