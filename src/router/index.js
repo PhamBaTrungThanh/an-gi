@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Head from 'vue-head'
 import Index from '@/views/Index'
+import Dish from '@/views/Dish'
 import CheckLogin from '@/views/CheckLogin'
 import Search from '@/views/Search'
 import isNil from 'lodash/isNil'
@@ -39,6 +40,15 @@ const router = new Router({
       }
     },
     {
+      path: '/dish/:id',
+      name: 'dish',
+      component: Dish,
+      props: true,
+      meta: {
+        authNotRequired: true
+      }
+    },
+    {
       path: '/check-login',
       name: 'check-login',
       component: CheckLogin,
@@ -50,8 +60,10 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: () =>
-        import(/* webpackChunkName: "client-chunk-login" */
-        '@/views/Login.vue'),
+        import(
+          /* webpackChunkName: "client-chunk-login" */
+          '@/views/Login.vue'
+        ),
       meta: {
         authNotRequired: true
       }

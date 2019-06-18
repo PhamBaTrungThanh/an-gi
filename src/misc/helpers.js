@@ -28,8 +28,37 @@ export const localStorageAvailable = () => {
   }
 }
 
-export function getCurrentGeolocation(options = {}) {
+export function innerGetCurrentGeoLocation(options) {
   return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject, options)
+    navigator.geolocation.getCurrentPosition(
+      resolve,
+      ({ code, message }) =>
+        reject(
+          Object.assign(new Error(message), {
+            name: 'PositionError',
+            code
+          })
+        ),
+      options
+    )
   })
+}
+
+export async function getCurrentGeolocation() {
+  try {
+    const geolocation = await innerGetCurrentGeoLocation({
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    })
+    geolocation.status = 'success'
+    return geolocation
+  } catch (e) {
+    if (e.name == 'PositionError') {
+      console.log(e.message + '. code = ' + e.code)
+      return {
+        status: 'geolocation_not_available'
+      }
+    }
+  }
 }

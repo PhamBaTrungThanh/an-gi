@@ -5,24 +5,26 @@
 import GoogleMapsInit from '@/misc/google-maps-init'
 import { mapGetters, mapActions, mapState } from 'vuex'
 import debounce from 'lodash/debounce'
+import { getCurrentGeolocation } from '@/misc/helpers'
+import isNil from 'lodash/isNil'
 
 const PINS_SPIN_TIME = 20
+
 export default {
   name: 'GoogleMaps',
-  props: {
-    latitude: Number,
-    longitude: Number
-  },
   data() {
     return {
       googleMapApi: null,
       map: null,
-      pinsOnMap: []
+      pinsOnMap: [],
+      currentPositionPin: null,
+      currentLocation: null
     }
   },
   computed: {
     ...mapGetters('map', ['defaultMapStyle']),
-    ...mapState('dishes', ['pinsOnMap'])
+    ...mapState('dishes', ['dishesSuggestions']),
+    ...mapState('map', ['currentPositionCoordinates'])
   },
   watch: {
     // pins: function(newPins, oldPins) {
@@ -66,11 +68,24 @@ export default {
     //   this.addPins(markers)
     //   this.pinsOnMap = markers
     // }
+    currentPositionCoordinates: function() {
+      if (!isNil(this.map)) {
+        this.map.setCenter({
+          lat: this.currentPositionCoordinates.lat,
+          lng: this.currentPositionCoordinates.lng
+        })
+        this.drawCurrentPositionPin()
+      }
+    }
   },
   async mounted() {
     try {
-      const google = await GoogleMapsInit()
+      const [google, geolocationObject] = await Promise.all([
+        GoogleMapsInit(),
+        getCurrentGeolocation()
+      ])
       this.googleMapApi = google
+      this.checkCurrentPositionStatus(geolocationObject)
     } catch (error) {
       console.error(error)
     }
@@ -82,19 +97,22 @@ export default {
         zoom: 17,
         mapTypeId: 'roadmap',
         disableDefaultUI: true,
-        styles: this.defaultMapStyle
+        styles: this.defaultMapStyle,
+        maxZoom: 18
       })
       this.map.addListener(
         'bounds_changed',
         debounce(() => {
           const centerPoint = this.map.getCenter()
-          const coordinates = {
-            lat: centerPoint.lat(),
-            lng: centerPoint.lng(),
-            zoom: this.map.getZoom()
+          if (!isNil(centerPoint)) {
+            const coordinates = {
+              lat: centerPoint.lat(),
+              lng: centerPoint.lng(),
+              zoom: this.map.getZoom()
+            }
+            this.setCurrentMapCoordinates(coordinates)
+            this.setBoundingBoxCoordiantes(this.map.getBounds())
           }
-          this.setCurrentMapCoordinates(coordinates)
-          this.setBoundingBoxCoordiantes(this.map.getBounds())
         }, 400)
       )
     },
@@ -118,9 +136,42 @@ export default {
       //   index++
       // }
     },
+    drawCurrentPositionPin() {
+      if (isNil(this.currentPositionPin)) {
+        this.currentPositionPin = new this.googleMapApi.maps.Marker({
+          position: {
+            lat: this.currentPositionCoordinates.lat,
+            lng: this.currentPositionCoordinates.lng
+          },
+          map: this.map
+        })
+      } else {
+        this.currentPositionPin.setPosition({
+          lat: this.currentPositionCoordinates.lat,
+          lng: this.currentPositionCoordinates.lng
+        })
+      }
+    },
+    checkCurrentPositionStatus(geolocation) {
+      if (geolocation.status === 'success') {
+        const position = {
+          lat: geolocation.coords.latitude,
+          lng: geolocation.coords.longitude,
+          status: 'machine_geolocation'
+        }
+        this.setCurrentPositionCoordinates(position)
+      } else if (geolocation.status === 'geolocation_not_available') {
+        this.setCurrentPositionCoordinates({
+          lat: null,
+          lng: null,
+          status: 'geolocation_not_available'
+        })
+      }
+    },
     ...mapActions('map', [
       'setCurrentMapCoordinates',
-      'setBoundingBoxCoordiantes'
+      'setBoundingBoxCoordiantes',
+      'setCurrentPositionCoordinates'
     ])
   }
 }

@@ -8,7 +8,7 @@ export const GET_SUGGESTIONS_AROUND_CENTER_POINT = async ({ lat, lng }) => {
       latitude: lat,
       longitude: lng
     })
-    console.log(response.data)
+    return response.data
   } catch (error) {
     console.error(error)
   }

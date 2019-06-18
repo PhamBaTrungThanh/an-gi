@@ -9,5 +9,8 @@ export default {
   },
   setMapBoundingBoxCoordinates: (state, coords) => {
     state.mapBoundingBox = coords
+  },
+  setCurrentPositionCoordinates: (state, position) => {
+    state.currentPositionCoordinates = position
   }
 }

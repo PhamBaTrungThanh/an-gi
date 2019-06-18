@@ -1,13 +1,12 @@
 export default {
   centerCoordiates: {},
   zoomLevel: null,
-
+  currentPositionCoordinates: {},
   mapBoundingBox: {},
   style: {
     default: [
       {
         featureType: 'administrative',
-        elementType: 'geometry',
         stylers: [
           {
             visibility: 'off'
@@ -15,7 +14,73 @@ export default {
         ]
       },
       {
+        featureType: 'administrative.land_parcel',
+        elementType: 'labels',
+        stylers: [
+          {
+            visibility: 'off'
+          }
+        ]
+      },
+      {
+        featureType: 'landscape.man_made',
+        stylers: [
+          {
+            visibility: 'simplified'
+          }
+        ]
+      },
+      {
         featureType: 'poi',
+        elementType: 'labels.text',
+        stylers: [
+          {
+            visibility: 'off'
+          }
+        ]
+      },
+      {
+        featureType: 'poi.business',
+        stylers: [
+          {
+            visibility: 'off'
+          }
+        ]
+      },
+      {
+        featureType: 'poi.government',
+        stylers: [
+          {
+            visibility: 'off'
+          }
+        ]
+      },
+      {
+        featureType: 'poi.medical',
+        stylers: [
+          {
+            visibility: 'off'
+          }
+        ]
+      },
+      {
+        featureType: 'poi.place_of_worship',
+        stylers: [
+          {
+            visibility: 'off'
+          }
+        ]
+      },
+      {
+        featureType: 'poi.school',
+        stylers: [
+          {
+            visibility: 'off'
+          }
+        ]
+      },
+      {
+        featureType: 'poi.sports_complex',
         stylers: [
           {
             visibility: 'off'
@@ -28,6 +93,15 @@ export default {
         stylers: [
           {
             visibility: 'off'
+          }
+        ]
+      },
+      {
+        featureType: 'road.local',
+        elementType: 'labels',
+        stylers: [
+          {
+            visibility: 'simplified'
           }
         ]
       },

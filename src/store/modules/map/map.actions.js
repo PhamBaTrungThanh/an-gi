@@ -6,21 +6,10 @@ export default {
     })
     commit('setMapZoomLevel', zoom)
   },
-  setDefaultCoordinates: ({ commit }) => {
-    const geoError = error => {
-      console.error(error)
-    }
-    const geoSuccess = position => {
-      const coors = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      }
-      commit('setCenterPointCoordinates', coors)
-    }
 
-    navigator.geolocation.getCurrentPosition(geoSuccess, geoError)
+  setCurrentPositionCoordinates({ commit }, position) {
+    commit('setCurrentPositionCoordinates', position)
   },
-
   setBoundingBoxCoordiantes: ({ commit }, bounds) => {
     const topLeft = bounds.getSouthWest()
     const bottomRight = bounds.getNorthEast()

@@ -5,7 +5,7 @@ export default function mapPlugin() {
     const queryDishesBaseOnMapCenter = async coords => {
       try {
         const dishPins = await GET_SUGGESTIONS_AROUND_CENTER_POINT(coords)
-        store.dispatch('dishes/setPinsOnMap', dishPins.hits)
+        //store.dispatch('dishes/setPinsOnMap', dishPins.hits)
       } catch (e) {
         console.log(e)
       }

@@ -1,7 +1,7 @@
 const PrerenderSPAPlugin = require('prerender-spa-plugin') // eslint-disable-line
 const path = require('path')
 
-const prerenderedRoutesList = ['/login', '/home', '/']
+const prerenderedRoutesList = ['/']
 
 module.exports = {
   /* See https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa for more details */

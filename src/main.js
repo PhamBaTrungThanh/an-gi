@@ -9,6 +9,7 @@ import '@/firebase/init'
 import '@/firebase/authentication'
 import '@/misc/handle-apple-install-prompt'
 import 'pwacompat'
+import '@/assets/css/variables.css'
 import '@/assets/css/tailwind.css'
 
 Vue.config.productionTip = false
