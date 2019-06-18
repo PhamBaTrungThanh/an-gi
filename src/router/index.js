@@ -36,7 +36,8 @@ const router = new Router({
       component: Search,
       props: true,
       meta: {
-        authNotRequired: true
+        authNotRequired: true,
+        dishEvent: true
       }
     },
     {
@@ -45,7 +46,8 @@ const router = new Router({
       component: Dish,
       props: true,
       meta: {
-        authNotRequired: true
+        authNotRequired: true,
+        dishEvent: true
       }
     },
     {

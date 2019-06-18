@@ -14,6 +14,7 @@ export default function mapPlugin() {
       // register event
       if (mutation.type === 'map/setCenterPointCoordinates') {
         queryDishesBaseOnMapCenter(mutation.payload)
+        store.dispatch('dishes/queryDishes')
       }
     })
   }

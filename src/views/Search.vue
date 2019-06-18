@@ -11,6 +11,7 @@
           v-model="queryString"
           placeholder="Bạn muốn ăn gì?"
           class="bg-gray-100 border border-solid border-gray-300 rounded-sm text-gray-800 px-2 py-1 flex-1 w-full"
+          :disabled="loading === true"
           @keydown.enter="search"
           @focus="$event.target.select()"
         />
@@ -54,14 +55,14 @@
           </svg>
         </a>
       </div>
-      <div v-if="loading === true" class="mt-20">
+      <div v-if="isQuerying === true" class="mt-20">
         <loader></loader>
       </div>
       <div
-        v-if="loading === false"
+        v-if="isQuerying === false"
         class="dishes__result mt-2 flex-1 overflow-y-auto"
       >
-        <template v-if="dishes.length === 0">
+        <template v-if="dishPool.length === 0">
           <h2 class="text-lg text-center font-bold text-gray-800 mt-4">
             Rất tiếc
           </h2>
@@ -71,7 +72,12 @@
           </p>
         </template>
         <template v-else>
-          <div v-for="dish in dishes" :key="dish.id" class="dish__result">
+          <div
+            v-for="dish in dishPool"
+            :key="dish.id"
+            class="dish__result"
+            @click="goToDish(dish.id)"
+          >
             <div class="dish__result__card p-2 flex bg-gray-100 mt-2 rounded">
               <img :src="dish.image" class="w-16 h-16 object-cover rounded" />
               <div class="dish__result__information ml-2 -mt-1 relative flex-1">
@@ -95,7 +101,7 @@
 
 <script>
 import Loader from '@/components/Loader'
-import { SEARCH_FOR_DISHES_BY_QUERY } from '@/API/dish'
+
 import { mapState } from 'vuex'
 
 export default {
@@ -105,47 +111,30 @@ export default {
   },
   data() {
     return {
-      dishes: [],
       loading: false,
       error: false,
-      queryString: ''
+      queryString: this.$route.params.query
     }
   },
   computed: {
-    ...mapState('map', ['currentPositionCoordinates'])
-  },
-  watch: {
-    $route: 'fetchDishesByQuery'
-  },
-  created() {
-    this.fetchDishesByQuery()
+    ...mapState('map', ['currentPositionCoordinates']),
+    ...mapState('dishes', ['isQuerying', 'dishPool'])
   },
 
   methods: {
-    fetchDishesByQuery() {
-      this.loading = true
-      this.dishes = []
-      this.error = false
-      this.queryString = this.$route.params.query
-      ;(async () => {
-        try {
-          const response = await SEARCH_FOR_DISHES_BY_QUERY({
-            query: this.$route.params.query,
-            lat: this.currentPositionCoordinates.lat,
-            lng: this.currentPositionCoordinates.lng
-          })
-          this.dishes = response.data
-          this.loading = false
-        } catch (e) {
-          console.log(e)
-        }
-      })()
-    },
     search() {
       this.$router.push({
         name: 'search',
         params: {
           query: this.queryString
+        }
+      })
+    },
+    goToDish(id) {
+      this.$router.push({
+        name: 'dish',
+        params: {
+          id: id
         }
       })
     }
