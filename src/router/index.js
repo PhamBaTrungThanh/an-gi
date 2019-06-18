@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Head from 'vue-head'
-import Home from '@/views/Home'
+import Index from '@/views/Index'
 import CheckLogin from '@/views/CheckLogin'
+import Search from '@/views/Search'
 import isNil from 'lodash/isNil'
 import store from '@/store'
 
@@ -21,9 +22,18 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/home',
-      name: 'home',
-      component: Home,
+      path: '/',
+      name: 'index',
+      component: Index,
+      meta: {
+        authNotRequired: true
+      }
+    },
+    {
+      path: '/search/:query',
+      name: 'search',
+      component: Search,
+      props: true,
       meta: {
         authNotRequired: true
       }
@@ -48,7 +58,7 @@ const router = new Router({
     },
     {
       path: '*',
-      redirect: '/home'
+      redirect: '/'
     }
   ]
 })
