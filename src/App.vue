@@ -1,11 +1,14 @@
 <template>
   <div id="app">
     <!-- <nav-bar></nav-bar> -->
-    <div class="main-wrapper">
-      <router-view />
-    </div>
-    <google-maps></google-maps>
     <location></location>
+    <template v-if="locationReady">
+      <div class="main-wrapper">
+        <router-view />
+      </div>
+      <google-maps></google-maps>
+    </template>
+
     <new-content-available-toastr
       v-if="newContentAvailable"
       class="new-content-available-toastr"
@@ -37,7 +40,11 @@ export default {
   },
   computed: {
     ...mapGetters('app', ['newContentAvailable']),
-    ...mapState('app', ['showAddToHomeScreenModalForApple', 'refreshingApp'])
+    ...mapState('app', [
+      'showAddToHomeScreenModalForApple',
+      'refreshingApp',
+      'locationReady'
+    ])
   },
   methods: mapActions('app', [
     'closeAddToHomeScreenModalForApple',

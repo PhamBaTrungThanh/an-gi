@@ -1,6 +1,6 @@
 .current_position_pin:before {
   display: block;
-  content: "";
+  content: '';
   width: 3rem;
   height: 3rem;
   background: white;
@@ -15,7 +15,7 @@
 
 .current_position_pin:after {
   display: block;
-  content: "";
+  content: '';
   transform-origin: top left;
   width: 2rem;
   height: 2rem;
@@ -55,7 +55,7 @@
   content: "";
 } */
 .destination_pin:after {
-  content: "";
+  content: '';
   position: absolute;
   width: 0;
   height: 0;
@@ -72,8 +72,6 @@
 
   box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.4);
 }
-
-
 
 .destination_pin img {
   width: 100%;

@@ -82,10 +82,10 @@
               <img :src="dish.image" class="w-16 h-16 object-cover rounded" />
               <div class="dish__result__information ml-2 -mt-1 relative flex-1">
                 <h3 class="font-bold">
-                  <span v-html="dish.highlights.name.value"></span>
+                  <span>{{ dish.name }}</span>
                 </h3>
                 <p class="text-sm text-gray-600">
-                  <span v-html="dish.highlights.location.value"></span>
+                  <span>{{ dish.location }}</span>
                 </p>
                 <small class="text-xs text-gray-500 absolute bottom-0 right-0"
                   >~{{ (dish.geodistance / 1000).toFixed(1) }} km</small

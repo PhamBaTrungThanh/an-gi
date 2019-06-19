@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="modal-wrapper">
+    <div class="z-50">
       <div class="close" @click="$emit('close')"></div>
       <div class="main-content">
         <img class="app-logo" src="@/assets/logo.png" />

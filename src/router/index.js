@@ -62,10 +62,8 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: () =>
-        import(
-          /* webpackChunkName: "client-chunk-login" */
-          '@/views/Login.vue'
-        ),
+        import(/* webpackChunkName: "client-chunk-login" */
+        '@/views/Login.vue'),
       meta: {
         authNotRequired: true
       }

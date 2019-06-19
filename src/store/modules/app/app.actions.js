@@ -18,5 +18,8 @@ export default {
 
     commit('setRefreshingApp', true)
     state.SWRegistrationForNewContent.waiting.postMessage('skipWaiting')
+  },
+  locationIsReady({ commit }) {
+    commit('setLocationReady')
   }
 }

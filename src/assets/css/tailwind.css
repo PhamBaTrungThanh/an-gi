@@ -30,3 +30,8 @@
 em {
   background: yellow;
 }
+
+.ratio-1\/1 {
+  padding-top: 100%;
+  width: 100%;
+}

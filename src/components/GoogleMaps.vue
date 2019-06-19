@@ -2,10 +2,9 @@
   <div ref="googleMap" class="google-maps w-screen h-screen"></div>
 </template>
 <script>
-import GoogleMapsInit from '@/misc/google-maps-init'
 import { mapGetters, mapActions, mapState } from 'vuex'
 import debounce from 'lodash/debounce'
-import { getCurrentGeolocation } from '@/misc/helpers'
+
 import isNil from 'lodash/isNil'
 import isEmpty from 'lodash/isEmpty'
 import createHTMLMapMarker from '@/misc/custom-overlays-for-map'
@@ -75,21 +74,12 @@ export default {
     destinationPoint: 'toggleDestination',
     currentPositionCoordinates: 'setMapCenter'
   },
-  async mounted() {
-    try {
-      const [, geolocationObject] = await Promise.all([
-        GoogleMapsInit(),
-        getCurrentGeolocation()
-      ])
-      this.checkCurrentPositionStatus(geolocationObject)
-    } catch (error) {
-      console.error(error)
-    }
-    this.setGoogleMapState()
+  mounted() {
     this.initializeMap()
   },
   methods: {
     initializeMap() {
+      console.log('initialize map')
       this.map = new window.google.maps.Map(this.$refs.googleMap, {
         zoom: 17,
         mapTypeId: 'roadmap',
@@ -104,6 +94,10 @@ export default {
             south: 20.940312549774596
           },
           strictBounds: true
+        },
+        center: {
+          lat: this.currentPositionCoordinates.lat,
+          lng: this.currentPositionCoordinates.lng
         }
       })
 
@@ -128,6 +122,7 @@ export default {
           }
         }, 400)
       )
+      this.drawCurrentPositionPin()
     },
     // removePins(pinsToRemove = []) {
     //   remove old pins
@@ -150,42 +145,20 @@ export default {
     //   }
     // },
     drawCurrentPositionPin() {
-      if (isEmpty(this.currentPositionPin)) {
-        this.currentPositionPin = createHTMLMapMarker({
-          latlng: this.originLatLng,
-          map: this.map,
-          html: `<div class="current_position_pin"></div>`
-        })
-      } else {
-        this.currentPositionPin.setPosition(this.originLatLng)
+      this.originLatLng = new window.google.maps.LatLng(
+        this.currentPositionCoordinates.lat,
+        this.currentPositionCoordinates.lng
+      )
+      if (!isEmpty(this.currentPositionPin)) {
+        this.currentPositionPin.setMap(null)
       }
+      this.currentPositionPin = createHTMLMapMarker({
+        latlng: this.originLatLng,
+        map: this.map,
+        html: `<div class="current_position_pin"></div>`
+      })
     },
-    checkCurrentPositionStatus(geolocation) {
-      if (geolocation.status === 'success') {
-        const position = {
-          lat: geolocation.coords.latitude,
-          lng: geolocation.coords.longitude,
-          status: 'machine_geolocation'
-        }
-        this.setCurrentPositionCoordinates(position)
-      } else if (geolocation.status === 'geolocation_not_available') {
-        this.setCurrentPositionCoordinates({
-          lat: null,
-          lng: null,
-          status: 'geolocation_not_available'
-        })
-      }
-    },
-    setMapCenter() {
-      if (!isNil(this.map)) {
-        this.originLatLng = new window.google.maps.LatLng(
-          this.currentPositionCoordinates.lat,
-          this.currentPositionCoordinates.lng
-        )
-        this.map.setCenter(this.originLatLng)
-        this.drawCurrentPositionPin()
-      }
-    },
+
     toggleDestination() {
       if (isEmpty(this.destinationPoint)) {
         this.clearDestination()
@@ -195,6 +168,7 @@ export default {
           this.destinationPoint.lat,
           this.destinationPoint.lng
         )
+        this.clearDestination()
         this.createDestination(destinationLatLng)
         this.createDirection(destinationLatLng)
       }
@@ -208,13 +182,17 @@ export default {
         }"></div>`
       })
     },
-    clearDestination() {},
+    clearDestination() {
+      if (!isEmpty(this.destinationPin)) {
+        this.destinationPin.setMap(null)
+      }
+    },
     createDirection(destinationLatLng) {
       this.directionsService.route(
         {
           origin: this.originLatLng,
           destination: destinationLatLng,
-          travelMode: 'DRIVING',
+          travelMode: 'WALKING',
           provideRouteAlternatives: true
         },
         (response, status) => {
@@ -230,8 +208,7 @@ export default {
     ...mapActions('map', [
       'setCurrentMapCoordinates',
       'setBoundingBoxCoordiantes',
-      'setCurrentPositionCoordinates',
-      'setGoogleMapState'
+      'setCurrentPositionCoordinates'
     ])
   }
 }

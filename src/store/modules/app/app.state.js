@@ -4,5 +4,5 @@ export default {
   SWRegistrationForNewContent: null,
   showAddToHomeScreenModalForApple: false,
   refreshingApp: false,
-  googleMapStatus: 'inactive'
+  locationReady: false
 }
