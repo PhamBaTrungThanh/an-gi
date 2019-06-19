@@ -1,4 +1,6 @@
-workbox.core.setCacheNameDetails({ prefix: 'bento-starter' })
+workbox.core.setCacheNameDetails({
+  prefix: 'an-gi-day'
+})
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
@@ -15,7 +17,8 @@ workbox.routing.registerNavigationRoute('/index.html', {
   blacklist: [
     new RegExp('/__/auth/handler'),
     new RegExp('/__/auth/iframe'),
-    new RegExp('/.well-known')
+    new RegExp('/.well-known'),
+    new RegExp('/api')
   ]
 })
 

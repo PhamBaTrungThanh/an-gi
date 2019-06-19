@@ -33,7 +33,7 @@ export default function init() {
   const script = document.createElement('script')
   script.async = true
   script.defer = true
-  script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=${CALLBACK_NAME}&region=VN&language=vn`
+  script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=${CALLBACK_NAME}&region=VN&language=vn&libraries=places`
   script.onerror = rejectInitPromise
   document.querySelector('head').appendChild(script)
 

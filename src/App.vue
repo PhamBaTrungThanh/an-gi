@@ -5,6 +5,7 @@
       <router-view />
     </div>
     <google-maps></google-maps>
+    <location></location>
     <new-content-available-toastr
       v-if="newContentAvailable"
       class="new-content-available-toastr"
@@ -23,7 +24,7 @@
 import NewContentAvailableToastr from '@/components/NewContentAvailableToastr'
 import AppleAddToHomeScreenModal from '@/components/AppleAddToHomeScreenModal'
 import GoogleMaps from '@/components/GoogleMaps'
-
+import Location from '@/components/Location'
 import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -31,7 +32,8 @@ export default {
     // NavBar,
     NewContentAvailableToastr,
     AppleAddToHomeScreenModal,
-    GoogleMaps
+    GoogleMaps,
+    Location
   },
   computed: {
     ...mapGetters('app', ['newContentAvailable']),

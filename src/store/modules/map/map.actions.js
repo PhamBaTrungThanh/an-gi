@@ -7,8 +7,17 @@ export default {
     commit('setMapZoomLevel', zoom)
   },
 
-  setCurrentPositionCoordinates({ commit }, position) {
+  setCurrentPositionCoordinates({ commit, state, dispatch }, position) {
     commit('setCurrentPositionCoordinates', position)
+
+    if (state.mapPipeline.length > 0) {
+      for (const pipeline of state.mapPipeline) {
+        dispatch(pipeline, null, {
+          root: true
+        })
+      }
+      commit('clearMapPipeline')
+    }
   },
   setBoundingBoxCoordiantes: ({ commit }, bounds) => {
     const topLeft = bounds.getSouthWest()
@@ -19,5 +28,14 @@ export default {
       point2_lat: bottomRight.lat(),
       point2_lng: bottomRight.lng()
     })
+  },
+  setGoogleMapState({ commit }) {
+    commit('setGoogleMapReady')
+  },
+  setDestination({ commit }, destinationPoint) {
+    commit('setDestinationPoint', destinationPoint)
+  },
+  clearDestination({ commit }) {
+    commit('clearDestinationPoint')
   }
 }

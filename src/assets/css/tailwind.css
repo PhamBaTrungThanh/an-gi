@@ -19,6 +19,14 @@
   height: calc(100vh / 4 * 3);
 }
 
+.h-1\/5-screen {
+  height: calc(100vh / 5);
+}
+
+.h-1\/6-screen {
+  height: calc(100vh / 5);
+}
+
 em {
   background: yellow;
 }

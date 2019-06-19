@@ -1,8 +1,12 @@
 export default {
   centerCoordiates: {},
+
+  destinationPoint: {},
   zoomLevel: null,
   currentPositionCoordinates: {},
+  currentPositionAddress: '',
   mapBoundingBox: {},
+  mapPipeline: [],
   style: {
     default: [
       {

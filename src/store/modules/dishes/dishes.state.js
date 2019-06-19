@@ -1,6 +1,5 @@
 export default {
   dishesSuggestions: [],
-  currentDish: false,
   currentQuery: false,
   dishPool: [],
   nextPoolLink: false,

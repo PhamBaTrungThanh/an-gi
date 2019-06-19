@@ -13,7 +13,7 @@ Vue.use(Router)
 /* If you don't know about VueHead, please refer to https://github.com/ktquez/vue-head */
 
 Vue.use(Head, {
-  complement: 'bento-starter'
+  complement: 'an-gi-day'
 })
 
 /* If you don't know about VueRouter, please refer to https://router.vuejs.org/ */

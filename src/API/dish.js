@@ -15,7 +15,7 @@ export const SEARCH_FOR_DISHES_BY_QUERY = async ({ query, lat, lng }) => {
     console.error(error)
   }
 }
-export const VIEW_DISH = async ({ id, lat, lng }) => {
+export const VIEW_SINGLE_DISH = async ({ id, lat, lng }) => {
   try {
     const response = await API.post(API_VIEW_DISH, {
       latitude: lat,

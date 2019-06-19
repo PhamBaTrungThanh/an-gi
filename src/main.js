@@ -12,6 +12,7 @@ import '@/misc/handle-apple-install-prompt'
 import 'pwacompat'
 import '@/assets/css/variables.css'
 import '@/assets/css/tailwind.css'
+import '@/assets/css/custom-markers.css'
 
 sync(store, router) / Vue.use(AsyncComputed)
 Vue.config.productionTip = false

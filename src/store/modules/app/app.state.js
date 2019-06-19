@@ -3,5 +3,6 @@ export default {
   networkOnLine: true,
   SWRegistrationForNewContent: null,
   showAddToHomeScreenModalForApple: false,
-  refreshingApp: false
+  refreshingApp: false,
+  googleMapStatus: 'inactive'
 }

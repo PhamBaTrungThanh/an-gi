@@ -15,5 +15,8 @@ export default {
   },
   addToDishPool(state, dishes) {
     state.dishPool.push(...dishes)
+  },
+  setCurrentDishId(state, id) {
+    state.currentDishId = id
   }
 }

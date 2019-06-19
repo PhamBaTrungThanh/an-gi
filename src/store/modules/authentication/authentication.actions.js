@@ -21,17 +21,28 @@ export default {
   /**
    * Callback fired when user logout
    */
-  logout: async ({ commit, state }, firebaseUser) => {
+  logout: async ({ commit, state, dispatch }, firebaseUser) => {
     if (isNil(firebaseUser)) {
       const guestCredentials = await PASSPORT_REQUEST_CREDENTIALS(
         state.guestCredentials
       )
-      commit('setCredentials', guestCredentials)
+      dispatch('setCredentials', guestCredentials)
       commit('setUserAsGuest')
     }
     const currentRouter = router.app.$route
     if (!(currentRouter.meta && currentRouter.meta.authNotRequired)) {
       router.push('/login')
+    }
+  },
+  setCredentials({ commit, state, dispatch }, credentials) {
+    commit('setCredentialsState', credentials)
+    if (state.pipeline.length > 0) {
+      for (const pipeline of state.pipeline) {
+        dispatch(pipeline, null, {
+          root: true
+        })
+      }
+      commit('clearPipeline')
     }
   }
 }

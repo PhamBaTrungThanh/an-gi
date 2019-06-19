@@ -14,10 +14,16 @@ export default {
       type: 'guest'
     }
   },
-  setCredentials(state, { access_token, refresh_token }) {
+  setCredentialsState(state, { access_token, refresh_token }) {
     state.credentials = {
       accessToken: access_token,
       refreshToken: refresh_token
     }
+  },
+  clearPipeline(state) {
+    state.pipeline = []
+  },
+  pushToPipeline(state, action) {
+    state.pipeline.push(action)
   }
 }

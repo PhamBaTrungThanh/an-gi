@@ -8,12 +8,9 @@ const API_INSTANCE = axios.create({
 API_INSTANCE.interceptors.request.use(
   config => {
     const authToken = GET_STORED_CREDENTIALS()
+
     if (authToken === '') {
-      return {
-        headers: {},
-        method: config.method,
-        url: ''
-      }
+      throw new axios.Cancel('No authorization header, canceling.')
     }
     config.headers['Authorization'] = `Bearer ${authToken}`
     return config
