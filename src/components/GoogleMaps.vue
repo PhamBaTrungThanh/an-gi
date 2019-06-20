@@ -1,5 +1,17 @@
 <template>
-  <div ref="googleMap" class="google-maps w-screen h-screen"></div>
+  <div class="w-screen h-screen">
+    <div
+      ref="googleMap"
+      :class="{
+        'w-full': true,
+        'h-full': true,
+        hidden: shouldHideGoogleMap
+      }"
+    ></div>
+    <div v-if="shouldHideGoogleMap" class="google-maps-static">
+      <img :src="googleMapsStaticImage" />
+    </div>
+  </div>
 </template>
 <script>
 import { mapGetters, mapActions, mapState } from 'vuex'
@@ -25,6 +37,20 @@ export default {
     }
   },
   computed: {
+    shouldHideGoogleMap() {
+      return false
+    },
+    googleMapsStaticImage() {
+      return `https://maps.googleapis.com/maps/api/staticmap?center=${
+        this.currentPositionCoordinates.lat
+      },${this.currentPositionCoordinates.lng}&zoom=13&language=VN&size=${
+        window.innerWidth
+      }x${window.innerHeight}&maptype=roadmap
+&markers=color:blue%7C${this.currentPositionCoordinates.lat},${
+        this.currentPositionCoordinates.lng
+      }
+&key=AIzaSyCtubooeixMRXbKyQf9VOSWzQF-2CQuDYU`
+    },
     ...mapGetters('map', ['defaultMapStyle']),
     ...mapState('dishes', ['dishesSuggestions']),
     ...mapState('map', ['currentPositionCoordinates', 'destinationPoint'])

@@ -33,12 +33,12 @@ export default {
   data: () => ({ loginError: null }),
   head: {
     title: {
-      inner: 'Login'
+      inner: 'Đăng nhập'
     },
     meta: [
       {
         name: 'description',
-        content: 'Sign in or sign up to bento-starter',
+        content: 'Đăng nhập hoặc đăng ký vào hệ thống',
         id: 'desc'
       }
     ]

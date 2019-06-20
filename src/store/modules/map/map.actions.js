@@ -12,6 +12,7 @@ export default {
 
     if (state.mapPipeline.length > 0) {
       for (const pipeline of state.mapPipeline) {
+        console.log('dispatch action in pipeline: ', pipeline)
         dispatch(pipeline, null, {
           root: true
         })

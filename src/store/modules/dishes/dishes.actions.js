@@ -3,20 +3,24 @@ import isEmpty from 'lodash/isEmpty'
 import { SEARCH_FOR_DISHES_BY_QUERY, VIEW_SINGLE_DISH } from '@/API/dish'
 
 const awaitSystemReady = async (rootState, commit, actionName) => {
+  console.log({
+    actionName
+  })
   try {
     const currentPositionCoordinates = rootState.map.currentPositionCoordinates
     if (isEmpty(currentPositionCoordinates)) {
       commit('map/pushToMapPipeline', actionName, {
         root: true
       })
-      throw 'No current position detected, registering self to map pipeline :: from' +
+      throw 'No current position detected, registering self to map pipeline :: from ' +
         actionName
     }
     if (isNil(rootState.authentication.credentials.accessToken)) {
       commit('authentication/pushToPipeline', actionName, {
         root: true
       })
-      throw 'No authentication detected, registering self to authentication pipeline'
+      throw 'No authentication detected, registering self to authentication pipeline :: from ' +
+        actionName
     }
   } catch (e) {
     console.log(e)

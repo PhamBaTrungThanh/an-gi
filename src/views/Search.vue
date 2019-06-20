@@ -15,7 +15,7 @@
           @keydown.enter="search"
           @focus="$event.target.select()"
         />
-        <a class="cursor-pointer ml-1" @click="search">
+        <!-- <a class="cursor-pointer ml-1" @click="search">
           <svg
             width="38"
             height="38"
@@ -53,7 +53,7 @@
               fill="#444B54"
             ></path>
           </svg>
-        </a>
+        </a>-->
       </div>
       <div v-if="isQuerying === true" class="mt-20">
         <loader></loader>
@@ -115,6 +115,18 @@ export default {
       error: false,
       queryString: this.$route.params.query
     }
+  },
+  head: {
+    title: {
+      inner: 'Tìm kiếm'
+    },
+    meta: [
+      {
+        name: 'description',
+        content: 'Tìm kiếm món ăn',
+        id: 'desc'
+      }
+    ]
   },
   computed: {
     ...mapState('map', ['currentPositionCoordinates']),

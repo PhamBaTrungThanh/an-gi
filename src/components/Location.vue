@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div class>
     <div
       v-if="currentPositionStatus === 'enabled'"
-      class="location fixed left-0 right-0 top-0 h-12 p-2"
+      class="location fixed left-0 right-0 top-0 h-12 p-2 z-20 lg:right-auto lg:w-1/3"
     >
       <div
-        class="bg-white h-10 shadow border border-gray-200 border-solid flex lg:w-2/5"
+        class="bg-white h-10 shadow border border-gray-200 border-solid flex lg:w-128"
       >
         <img src="@/assets/img/ui/location.png" class="w-16 h-16" />
         <div class="ml-18 px-1 pt-2 flex-1">
-          <input
+          <!-- <input
             id="searchBox"
             ref="searchBox"
             v-model="address"
@@ -17,7 +17,8 @@
             class="outline-none w-full"
             placeholder="Bạn đang ở đâu đấy?"
             @focus="$event.target.select()"
-          />
+          />-->
+          <span class>{{ address }}</span>
         </div>
       </div>
     </div>
@@ -86,6 +87,7 @@ export default {
         this.setCurrentPositionCoordinates(position)
         this.currentPositionStatus = 'enabled'
         this.locationIsReady()
+        this.getCurrentPositionAddress()
       } else if (geolocation.status === 'geolocation_not_available') {
         // this.setCurrentPositionCoordinates({
         //   lat: null,
@@ -93,8 +95,8 @@ export default {
         //   status: 'geolocation_not_available'
         // })
         this.currentPositionStatus = 'notavaiable'
-        this.initalizeSearchBox()
       }
+      this.initalizeSearchBox()
     },
 
     getCurrentPositionAddress() {

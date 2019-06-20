@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import AsyncComputed from 'vue-async-computed'
+
 import { sync } from 'vuex-router-sync'
 import App from './App.vue'
 import router from './router'
@@ -14,7 +14,7 @@ import '@/assets/css/variables.css'
 import '@/assets/css/tailwind.css'
 import '@/assets/css/custom-markers.css'
 
-sync(store, router) / Vue.use(AsyncComputed)
+sync(store, router)
 Vue.config.productionTip = false
 
 new Vue({

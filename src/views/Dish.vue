@@ -152,6 +152,11 @@ export default {
       isDirecting: false
     }
   },
+  head: {
+    title: {
+      inner: 'Món ăn'
+    }
+  },
   computed: {
     ...mapState('map', ['currentPositionCoordinates']),
     ...mapState('dishes', [
